@@ -1,18 +1,23 @@
-import { RemeshState } from "remesh";
-import { OrderState } from ".";
+import { RemeshDomainContext, RemeshState } from "remesh";
+import { Buyer, OrderState } from ".";
 
-export const getCommands = (domain: any, state: RemeshState<OrderState>) => {
-  const updateBuyer = domain.command({
-    name: "updateBuyer",
-    impl({ get }: any, buyer: any) {
-      return state().new({
+export const getCommands = (
+  domain: RemeshDomainContext,
+  state: RemeshState<OrderState>,
+  events: any,
+) => {
+  const UpdateBuyerCommand = domain.command({
+    name: "UpdateBuyerCommand",
+    impl({ get }, buyer: Buyer) {
+      const newState = state().new({
         ...get(state()),
-        buyer
+        buyer,
       });
-    }
+      return [newState, events.UpdateBuyerEvent(buyer)];
+    },
   });
 
   return {
-    updateBuyer
+    UpdateBuyerCommand,
   };
 };
