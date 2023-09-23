@@ -62,24 +62,13 @@ const TodoAppDomain = Remesh.domain({
       },
     })
 
-    /* RemeshYjs(domain, {
-      key: 'todo-app',
-      dataType: 'object',
-      onSend: ({ get }): TodoAppState => {
-        return get(TodoAppStateQuery())
-      },
-      onReceive: ({}, state: TodoAppState) => {
-        return UpdateTodoAppStateCommand(state)
-      },
-    }) */
-
     const TodoAppHistoryModule = HistoryModule(domain, {
       name: 'TodoAppHistoryModule',
       query: ({ get }) => {
         const state = get(TodoAppStateQuery())
         return state
       },
-      command: ({}, state: TodoAppState) => {
+      command: ({ }, state: TodoAppState) => {
         return UpdateTodoAppStateCommand(state)
       },
     })
@@ -105,8 +94,6 @@ export const TodoApp = () => {
   const navigate = useNavigate()
 
   useRemeshEvent(todoAppDomain.event.TodoFilterSyncEvent, (todoFilter) => {
-    console.log(`/todo/${todoFilter}`)
-    debugger
     navigate(`/todo/${todoFilter}`)
   })
 

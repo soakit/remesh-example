@@ -1,6 +1,14 @@
+body {
+  width: auto;
+  max-width: initial;
+}
 .app {
   display: flex;
   .menu {
-    margin-right: 20px;
+    margin-right: 40px;
   }
+}
+
+.todoapp {
+  min-width: 500px;
 }

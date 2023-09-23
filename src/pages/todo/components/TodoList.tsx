@@ -7,16 +7,14 @@ import { TodoItem } from './TodoItem'
 
 export const TodoList = () => {
   const todoAppDomain = useRemeshDomain(TodoAppDomain())
-  const filteredTodoKeyList = useRemeshQuery(todoAppDomain.query.FilteredTodoKeyListQuery())
-
-  console.log('render list')
+  const filteredTodoKeyList = useRemeshQuery(todoAppDomain.query.FilteredTodoListQuery())
 
   return (
     <section className="main">
       <ToggleAllInput />
       <ul className="todo-list">
-        {filteredTodoKeyList.map((todoId) => (
-          <TodoItem key={todoId} id={todoId} />
+        {filteredTodoKeyList.map((todo) => (
+          <TodoItem key={todo.id} item={todo} />
         ))}
       </ul>
     </section>

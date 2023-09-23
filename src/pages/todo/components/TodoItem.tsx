@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useRemeshDomain, useRemeshQuery, useRemeshSend } from 'remesh-react'
+import { useRemeshDomain, useRemeshSend } from 'remesh-react'
 
 import { TodoListDomain, Todo } from '../../../domains/todo/domains/TodoList'
 
@@ -7,14 +7,14 @@ import { useKeyPressHandler } from '../hooks/useKeyPressHandler'
 import { useInputHandler } from '../hooks/useInputHandler'
 
 export type TodoItemProps = {
-  id: Todo['id']
+  item: Todo
 }
 
 export function TodoItem(props: TodoItemProps) {
   const send = useRemeshSend()
   const todoListDomain = useRemeshDomain(TodoListDomain())
 
-  const todo = useRemeshQuery(todoListDomain.query.TodoQuery(props.id))
+  const todo = props.item;
 
   const [editing, setEditing] = useState(false)
 
