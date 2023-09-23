@@ -1,4 +1,6 @@
-.App {
-  font-family: sans-serif;
-  text-align: center;
+.app {
+  display: flex;
+  .menu {
+    margin-right: 20px;
+  }
 }

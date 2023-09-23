@@ -10,15 +10,17 @@
   "main": "src/index.tsx",
   "dependencies": {
     "loader-utils": "3.2.1",
+    "localforage": "^1.10.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.10.0",
     "react-scripts": "5.0.1",
-    "remesh": "4.2.0",
-    "remesh-logger": "4.0.0",
+    "remesh": "^4.2.0",
+    "remesh-logger": "^4.1.0",
     "remesh-react": "^4.1.0",
-    "remesh-redux-devtools": "4.0.0",
-    "rxjs": "7.8.0"
+    "remesh-redux-devtools": "^4.1.0",
+    "rxjs": "7.8.0",
+    "todomvc-app-css": "^2.4.2"
   },
   "devDependencies": {
     "@types/react": "18.0.25",
