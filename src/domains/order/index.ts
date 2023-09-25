@@ -1,14 +1,16 @@
 import { Remesh } from "remesh";
-import { getQuerys } from "./query";
+import { getQueries } from "./query";
 import { getCommands } from "./command";
 import { getEvents } from "./event";
 import { interval, map, take, tap } from "rxjs";
 
+export type Buyer = {
+  id: number;
+  name: string;
+};
+
 export type OrderState = {
-  buyer: null | {
-    id: number;
-    name: string;
-  };
+  buyer: null | Buyer;
   seller: null | {
     id: number;
     name: string;
@@ -22,43 +24,41 @@ export const OrderDomain = Remesh.domain({
       name: "OrderState",
       default: {
         buyer: null,
-        seller: null
-      }
+        seller: null,
+      },
     });
 
     const events = getEvents(domain);
-    const querys = getQuerys(domain, OrderState);
-    const commands = getCommands(domain, OrderState);
-
-    // console.log(
-    //   "commands.updateBuyer",
-    //   commands.updateBuyer({
-    //     id: 1,
-    //     name: "张三"
-    //   })
-    // );
+    const queries = getQueries(domain, OrderState);
+    const commands = getCommands(domain, OrderState, events);
 
     domain.effect({
-      name: "FakeEffect",
+      name: "InitEffect",
       impl() {
-        return interval(1000).pipe(
+        return [
+          commands.UpdateBuyerCommand({
+            id: 1,
+            name: "张三",
+          }),
+        ];
+        /* return interval(1000).pipe(
           take(1),
           map((value) => {
             return [
-              commands.updateBuyer({
+              commands.updateBuyerCommand({
                 id: 1,
                 name: "张三"
               })
             ];
           })
-        );
-      }
+        ); */
+      },
     });
 
     return {
-      query: querys,
+      query: queries,
       command: commands,
-      event: events
+      event: events,
     };
-  }
+  },
 });

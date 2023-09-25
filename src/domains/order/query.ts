@@ -1,22 +1,20 @@
-import {
-  DomainTypeOf,
-  RemeshCommandContext,
-  RemeshQueryContext,
-  RemeshState
-} from "remesh";
-import { OrderDomain, OrderState } from ".";
+import { RemeshDomainContext, RemeshQueryContext, RemeshState } from "remesh";
+import { OrderState } from ".";
 
-export const getQuerys = (domain: any, state: RemeshState<OrderState>) => {
-  const getBuyer = domain.query({
-    name: "getBuyer",
+export const getQueries = (
+  domain: RemeshDomainContext,
+  state: RemeshState<OrderState>,
+) => {
+  const GetBuyerQuery = domain.query({
+    name: "GetBuyerQuery",
     impl(d: RemeshQueryContext) {
       const curState = d.get(state());
 
       return curState.buyer;
-    }
+    },
   });
 
   return {
-    getBuyer
+    GetBuyerQuery,
   };
 };

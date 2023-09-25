@@ -1,4 +1,14 @@
-.App {
-  font-family: sans-serif;
-  text-align: center;
+body {
+  width: auto;
+  max-width: initial;
+}
+.app {
+  display: flex;
+  .menu {
+    margin-right: 40px;
+  }
+}
+
+.todoapp {
+  min-width: 500px;
 }
