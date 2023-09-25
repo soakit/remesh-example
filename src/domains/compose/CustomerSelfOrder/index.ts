@@ -1,5 +1,5 @@
 import { Remesh } from "remesh";
-import { BaseOrderModule } from "../BaseOrder";
+import { BaseOrderModule } from "../../base/BaseOrder";
 
 export const CustomerSelfOrderDomain = Remesh.domain({
   name: "CustomerSelfOrderDomain",

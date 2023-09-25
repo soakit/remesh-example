@@ -1,5 +1,5 @@
 import { useRemeshDomain, useRemeshQuery } from "remesh-react";
-import { CustomerSelfOrderDomain } from "../../domains/CustomerSelfOrder";
+import { CustomerSelfOrderDomain } from "../../domains/compose/CustomerSelfOrder";
 
 export const AddOrder = () => {
   
