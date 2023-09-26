@@ -1,38 +1,23 @@
 import { RemeshDomainContext, Capitalize } from "remesh";
-
-export type Buyer = {
-  id: number;
-  name: string;
-};
-
-export type Seller = {
-  id: number;
-  name: string;
-}
-
-// TODO:
-export type ProductItem = {};
-
-export type OrderState = {
-  buyer?: Buyer;
-  seller?: Seller;
-  products?: ProductItem[];
-};
+import { IOrganization } from "./typings/organ";
+import { OrderState } from "./typings/order";
 
 export type BaseOrderModuleOptions = {
-  name: Capitalize
-  default: OrderState
-}
+  name: Capitalize;
+  default: OrderState;
+};
 
-export const BaseOrderModule = (domain: RemeshDomainContext, options: BaseOrderModuleOptions) => {
-
+export const BaseOrderModule = (
+  domain: RemeshDomainContext,
+  options: BaseOrderModuleOptions
+) => {
   const OrderState = domain.state<OrderState>({
     name: `${options.name}.OrderState`,
     default: options.default,
   });
 
-  const UpdateBuyerEvent = domain.event<Buyer>({
-    name: `${options.name}.UpdateBuyerEvent`
+  const UpdateBuyerEvent = domain.event<IOrganization>({
+    name: `${options.name}.UpdateBuyerEvent`,
   });
 
   const GetBuyerQuery = domain.query({
@@ -46,7 +31,7 @@ export const BaseOrderModule = (domain: RemeshDomainContext, options: BaseOrderM
 
   const UpdateBuyerCommand = domain.command({
     name: `${options.name}.UpdateBuyerCommand`,
-    impl({ get }, buyer: Buyer) {
+    impl({ get }, buyer: IOrganization) {
       const newState = OrderState().new({
         ...get(OrderState()),
         buyer,
@@ -57,13 +42,13 @@ export const BaseOrderModule = (domain: RemeshDomainContext, options: BaseOrderM
 
   return {
     query: {
-      GetBuyerQuery
+      GetBuyerQuery,
     },
     command: {
-      UpdateBuyerCommand
+      UpdateBuyerCommand,
     },
     event: {
-      UpdateBuyerEvent
+      UpdateBuyerEvent,
     },
   };
 };

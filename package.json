@@ -9,6 +9,7 @@
   ],
   "main": "src/index.tsx",
   "dependencies": {
+    "@ircloud/types": "1.91.31",
     "loader-utils": "3.2.1",
     "localforage": "^1.10.0",
     "react": "18.2.0",
