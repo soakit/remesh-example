@@ -11,21 +11,21 @@ export const TodoAppDomain = Remesh.domain({
     const todoList = domain.getDomain(TodoListDomain())
     const todoFooter = domain.getDomain(TodoFilterDomain())
 
-    const FilteredTodoKeyListQuery = domain.query({
-      name: 'FilteredTodoKeyListQuery',
+    const FilteredTodoListQuery = domain.query({
+      name: 'FilteredTodoListQuery',
       impl: ({ get }) => {
         const filter = get(todoFooter.query.TodoFilterQuery())
 
         if (filter === 'all') {
-          return get(todoList.query.TodoListQuery()).map(getTodoId)
+          return get(todoList.query.TodoListQuery())
         }
 
         if (filter === 'active') {
-          return get(todoList.query.ActiveTodoListQuery()).map(getTodoId)
+          return get(todoList.query.ActiveTodoListQuery())
         }
 
         if (filter === 'completed') {
-          return get(todoList.query.CompletedTodoListQuery()).map(getTodoId)
+          return get(todoList.query.CompletedTodoListQuery())
         }
 
         throw new Error(`Unknown filter: ${filter}`)
@@ -44,7 +44,7 @@ export const TodoAppDomain = Remesh.domain({
 
     return {
       query: {
-        FilteredTodoKeyListQuery,
+        FilteredTodoListQuery,
       },
     }
   },

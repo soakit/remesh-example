@@ -1,13 +1,14 @@
 import { useRemeshDomain, useRemeshQuery } from "remesh-react";
-import { OrderDomain } from "../../domains/order";
+import { CustomerSelfOrderDomain } from "../../domains/compose/CustomerSelfOrder";
 
 export const AddOrder = () => {
-  const domain = useRemeshDomain(OrderDomain());
+  
+  const domain = useRemeshDomain(CustomerSelfOrderDomain());
 
   const buyer = useRemeshQuery(domain.query.GetBuyerQuery());
 
   return (
-    <div className="todoapp">
+    <div>
       <div>买方: {buyer?.name}</div>
     </div>
   );
